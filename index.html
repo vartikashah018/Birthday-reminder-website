@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Reminder</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🎂 Birthday Reminder</h1>
+  <form method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="date" placeholder="MM-DD" required>
+    <button type="submit">Add Birthday</button>
+  </form>
+  <h2>Saved Birthdays</h2>
+  <ul>
+    {% for b in birthdays %}
+      <li>{{ b.name }} - {{ b.date }} - {{ b.email }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
