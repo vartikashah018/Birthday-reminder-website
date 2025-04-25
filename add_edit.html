@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3">
+        <h2>{% if birthday %}Edit{% else %}Add{% endif %} Birthday</h2>
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       value="{{ birthday.name if birthday }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                       value="{{ birthday.email if birthday }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="birth_date" class="form-label">Birth Date</label>
+                <input type="date" class="form-control" id="birth_date" name="birth_date"
+                       value="{{ birthday.birth_date if birthday }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="notify_days_before" class="form-label">Notify Days Before</label>
+                <select class="form-select" id="notify_days_before" name="notify_days_before">
+                    <option value="1" {% if birthday and birthday.notify_days_before == 1 %}selected{% endif %}>1 day before</option>
+                    <option value="3" {% if birthday and birthday.notify_days_before == 3 %}selected{% endif %}>3 days before</option>
+                    <option value="7" {% if birthday and birthday.notify_days_before == 7 %}selected{% endif %}>1 week before</option>
+                    <option value="14" {% if birthday and birthday.notify_days_before == 14 %}selected{% endif %}>2 weeks before</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes (Optional)</label>
+                <textarea class="form-control" id="notes" name="notes" rows="3">{{ birthday.notes if birthday }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                {% if birthday %}Update{% else %}Add{% endif %} Birthday
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}l>
